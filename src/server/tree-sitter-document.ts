@@ -1,5 +1,6 @@
-import * as Parser from 'web-tree-sitter';
-import * as path from "path";
+import Parser from 'tree-sitter';
+import path from "path";
+import Teal from "tree-sitter-teal";
 import { TextDocumentContentChangeEvent, Range, Position } from 'vscode-languageserver/node';
 import { TextDocument } from 'vscode-languageserver-textdocument';
 import { URI } from 'vscode-uri';
@@ -7,7 +8,6 @@ import { upwardSearch } from './file-utils';
 
 export class TreeSitterDocument {
     private _parser: Parser | null;
-    private _lang: Parser.Language | null;
     private _tree: Parser.Tree | null;
     private _document: TextDocument | null;
 
@@ -23,7 +23,6 @@ export class TreeSitterDocument {
 
     constructor() {
         this._parser = null;
-        this._lang = null;
         this._tree = null;
         this._document = null;
         this._uri = "";
@@ -31,11 +30,8 @@ export class TreeSitterDocument {
     }
 
     async init(uri: string, text: string) {
-        await Parser.init();
         this._parser = new Parser();
-        const langPath = path.resolve(__dirname, "..", "tree-sitter-teal.wasm");
-        this._lang = await Parser.Language.load(langPath);
-        this._parser.setLanguage(this._lang);
+        this._parser.setLanguage(Teal);
         this._document = TextDocument.create(uri, "teal", 1, text);
         this._tree = this._parser.parse(text);
         this._uri = uri;

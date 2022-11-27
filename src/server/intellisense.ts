@@ -1,5 +1,5 @@
 import { CompletionItem, Position, CompletionItemKind } from "vscode-languageserver/node";
-import { SyntaxNode } from "web-tree-sitter";
+import { SyntaxNode } from "tree-sitter";
 import { Teal } from "./teal";
 import { positionAfterNode, TreeSitterDocument } from "./tree-sitter-document";
 
@@ -100,7 +100,7 @@ export function findIndexRootAtPosition(document: TreeSitterDocument, line: numb
         indexRoot = findNodeBeforeOrBelow(nodeAtPosition, ["index", "method_index", "identifier", "table_entry", "type_annotation", "arg", "simple_type", "type_index"]);
 
         if (indexRoot !== null && indexRoot.type === "table_entry") {
-            indexRoot = indexRoot.childForFieldName("value");
+            indexRoot = (indexRoot as any).childForFieldName("value");
         } else if (indexRoot !== null && indexRoot.type === "type_annotation") {
             indexRoot = findNodeBeforeOrBelow(indexRoot, ["simple_type", "type_index"]);
         } else if (indexRoot !== null && indexRoot.type === "arg") {
