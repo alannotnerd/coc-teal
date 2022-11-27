@@ -2,7 +2,7 @@
 	"name": "coc-teal",
 	"displayName": "Teal",
 	"description": "Teal language support for Coc.nvim",
-	"version": "0.0.1-dev",
+	"version": "0.0.2-dev",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
