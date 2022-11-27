@@ -1,9 +1,0 @@
-.vscode/**
-.vscode-test/**
-.gitignore
-vsc-extension-quickstart.md
-scripts/**
-test/**
-out/test/**
-.github/**
-emsdk-cache/**

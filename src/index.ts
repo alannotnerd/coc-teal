@@ -4,20 +4,20 @@
  * ------------------------------------------------------------------------------------------ */
 
 import * as path from 'path';
-import { workspace, ExtensionContext } from 'vscode';
-
 import {
+  workspace,
+  ExtensionContext,
 	LanguageClient,
 	LanguageClientOptions,
 	ServerOptions,
 	TransportKind
-} from 'vscode-languageclient/node';
+} from 'coc.nvim';
 
 let client: LanguageClient;
 
 export function activate(context: ExtensionContext) {
 	// The server is implemented in node
-	let serverModule = context.asAbsolutePath(path.join('out', 'server', 'server.js'));
+	let serverModule = context.asAbsolutePath(path.join('lib', 'server', 'server.js'));
 
 	// The debug options for the server
 	// --inspect=6009: runs the server in Node's Inspector mode so VS Code can attach to the server for debugging
